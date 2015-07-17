@@ -25,7 +25,7 @@ gulp.task('css', function () {
     browsers: ["last 2 versions"]
   }))
   .pipe(concat('style.css'))
-  .pipe(gulp.dest('./dest'));
+  .pipe(gulp.dest('./'));
 });
 
 // html
