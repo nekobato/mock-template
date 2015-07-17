@@ -18,7 +18,7 @@ var please = require('gulp-pleeease');
 var concat = require('gulp-concat');
 
 gulp.task('css', function () {
-  gulp.src('./src/*.less')
+  gulp.src('./src/**/*.less')
   .pipe(please({
     less: true,
     minifier: false,
@@ -28,11 +28,23 @@ gulp.task('css', function () {
   .pipe(gulp.dest('./dest'));
 });
 
+// html
+var jade = require('gulp-jade');
+
+gulp.task('html', function() {
+
+  gulp.src('./src/*.jade')
+    .pipe(jade())
+    .pipe(gulp.dest('./'));
+});
+
 // watch
 gulp.task('watch', function() {
-  gulp.watch('./src/*.less', ['css']);
-  gulp.watch('./src/*.js',   ['js']);
+  gulp.watch('./src/**/*.less', ['css']);
+  gulp.watch('./src/**/*.js',   ['js']);
+  gulp.watch('./src/**/*.jade', ['html']);
 });
 
 // task
-gulp.task('default', ['watch']);
+gulp.task('build',   ['css', 'js', 'html']);
+gulp.task('default', ['build', 'watch']);
