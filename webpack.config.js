@@ -1,8 +1,7 @@
 module.exports = {
   entry: "./src/main.js",
   output: {
-    path: "./build",
-    filename: "script.js"
+    filename: "./public/[name].js"
   },
   module: {
     loaders: [
