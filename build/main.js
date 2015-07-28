@@ -44,14 +44,14 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	'use strict'
 	
-	var css = __webpack_require__(2);
+	window.css1 = __webpack_require__(2);
 	
-	var comoponent1_template = __webpack_require__(6);
-	var comoponent1_script = __webpack_require__(9);
+	window.component2 = __webpack_require__(6);
 	
 	console.log('*** mock ***');
+
 
 /***/ },
 /* 1 */,
@@ -70,8 +70,8 @@
 	if(false) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js?browsers=last 2 versions!./../node_modules/less-loader/index.js!./style.less", function() {
-				var newContent = require("!!./../node_modules/css-loader/index.js!./../node_modules/autoprefixer-loader/index.js?browsers=last 2 versions!./../node_modules/less-loader/index.js!./style.less");
+			module.hot.accept("!!./node_modules/css-loader/index.js!./node_modules/less-loader/index.js!./style.less", function() {
+				var newContent = require("!!./node_modules/css-loader/index.js!./node_modules/less-loader/index.js!./style.less");
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -89,7 +89,7 @@
 	
 	
 	// module
-	exports.push([module.id, "*,\n*:before,\n*:after {\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  margin: 0;\n  padding: 0;\n}\ndiv {\n  background: #fff;\n}\n", ""]);
+	exports.push([module.id, ".hoge {\n  font-size: 10px;\n  line-height: 100px;\n}\n* {\n  box-sizing: border-box;\n}\nhtml,\nbody {\n  margin: 0;\n  padding: 0;\n}\n", ""]);
 	
 	// exports
 
@@ -379,18 +379,30 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var jade = __webpack_require__(7);
+	var template = __webpack_require__(7);
+	var style = __webpack_require__(10);
+	
+	module.exports = {
+	  template: template
+	}
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var jade = __webpack_require__(8);
 	
 	module.exports = function template(locals) {
 	var buf = [];
 	var jade_mixins = {};
 	var jade_interp;
 	
-	buf.push("<div><h2>component1</h2></div>");;return buf.join("");
+	buf.push("<div><p>component2 template</p></div>");;return buf.join("");
 	}
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -610,7 +622,7 @@
 	    throw err;
 	  }
 	  try {
-	    str = str || __webpack_require__(8).readFileSync(filename, 'utf8')
+	    str = str || __webpack_require__(9).readFileSync(filename, 'utf8')
 	  } catch (ex) {
 	    rethrow(err, null, lineno)
 	  }
@@ -642,20 +654,50 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/* (ignored) */
 
 /***/ },
-/* 9 */
-/***/ function(module, exports) {
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
-	module.exports = {
-	  data: null
-	};
+	// load the styles
+	var content = __webpack_require__(11);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(5)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./style.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/less-loader/index.js!./style.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(4)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, ".hoge {\n  font-size: 10px;\n  line-height: 100px;\n}\ndiv {\n  background: #ff0000;\n}\n", ""]);
+	
+	// exports
+
 
 /***/ }
 /******/ ]);
